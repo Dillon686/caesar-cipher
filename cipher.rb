@@ -39,5 +39,4 @@ def createStringFromArray(array)
     array.join("")
 end
 
-newArray = makeArrayFromString("Dillon Richardson")
-puts caesar_cipher("Dillon Richardson", -2)
+puts caesar_cipher("Ash Ketchum", -2)
