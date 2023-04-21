@@ -1,42 +1,43 @@
-def caesar_cipher(string, shift_factor)
-    alphabetUpper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-    alphabetLower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-    initialArray = makeArrayFromString(string)
-    newArray = []
+# frozen_string_literal: true
 
-    initialArray.each do |letter|
-        if letter == " "
-            newArray.push(" ")
-        elsif letter == letter.upcase
-            index = alphabetUpper.find_index(letter)
-            newIndex = index + shift_factor
-            if newIndex > ((alphabetUpper.length)-1) 
-                newIndex = shift_factor - (alphabetUpper.length - index)
-            end
-            newArray.push(alphabetUpper[newIndex])
-        elsif letter == letter.downcase
-            index = alphabetLower.find_index(letter)
-            newIndex = index + shift_factor
-            if newIndex > ((alphabetLower.length)-1) 
-                newIndex = shift_factor - (alphabetLower.length - index)
-            end
-            newArray.push(alphabetLower[newIndex])
-        end
+def caesar_cipher(string, shift)
+  alphabet_upper = %w[A B C D E F G H I J K L M N O P Q R S
+                      T U V W X Y Z]
+  alphabet_lower = %w[a b c d e f g h i j k l m n o p q r s
+                      t u v w x y z]
+  initial_array = make_array_from_string(string)
+  new_array = []
+
+  initial_array.each do |letter|
+    case letter
+    when ' '
+      new_array.push(' ')
+    when letter.upcase
+      index = alphabet_upper.find_index(letter)
+      new_index = index + shift
+      new_index = shift_factor - (alphabet_upper.length - index) if new_index > (alphabet_upper.length - 1)
+      new_array.push(alphabet_upper[new_index])
+    when letter.downcase
+      index = alphabet_lower.find_index(letter)
+      new_index = index + shift
+      new_index = shift_factor - (alphabet_lower.length - index) if new_index > (alphabet_lower.length - 1)
+      new_array.push(alphabet_lower[new_index])
     end
-    createStringFromArray(newArray)
+  end
+  create_string_from_array(new_array)
 end
 
-def makeArrayFromString(string)
-    stringArray = []
-    for i in 0...string.length
-        stringArray.push(string[i])
-    end
+def make_array_from_string(string)
+  string_array = []
+  (0...string.length).each do |i|
+    string_array.push(string[i])
+  end
 
-    return stringArray
+  string_array
 end
 
-def createStringFromArray(array)
-    array.join("")
+def create_string_from_array(array)
+  array.join('')
 end
 
-puts caesar_cipher("Ash Ketchum", -2)
+puts caesar_cipher('Jotaro Joestar', -6)
